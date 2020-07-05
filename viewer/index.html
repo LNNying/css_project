@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设计模式</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/dat.gui.min.js"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts/echarts.min.js?_v_=1590434554116"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts-stat/ecStat.min.js?_v_=1590434554116"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts/map/js/china.js?_v_=1590434554116"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts/map/js/world.js?_v_=1590434554116"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts/extension/dataTool.js?_v_=1590434554116"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&amp;ak=KOmVjPVUAey1G2E8zNhPiuQ6QiEmAwZu&amp;__ec_v__=20190126"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=2.0&amp;ak=KOmVjPVUAey1G2E8zNhPiuQ6QiEmAwZu&amp;services=&amp;t=20200327103013"></script>
+    <script type="text/javascript" src="https://echarts.cdn.apache.org/examples/vendors/echarts/extension/bmap.js?_v_=1590434554116"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            /*background-image: url("images/body.jpg");*/
+            background-repeat: repeat;
+            overflow-x: hidden;
+        }
+
+        .header {
+            width: 100%;
+            height: 50px;
+            position: fixed;
+            z-index: 100;
+            background-image: url("images/title.jpg");
+            background-repeat: repeat;
+        }
+
+        .title {
+            text-align: center;
+            height: 100%;
+            line-height: 55px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Calibri Light";
+            color: white;
+        }
+
+        .map {
+            position: relative;
+            top: 50px;
+        }
+        .map1 {
+            border-top: 5px solid #3f7fff;
+            border-bottom: 5px solid #3f7fff;
+            border-top-left-radius: 5px 5px;
+            border-top-right-radius: 5px 5px;
+            border-bottom-left-radius: 5px 5px;
+            border-bottom-right-radius: 5px 5px;
+            position: relative;
+            top: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <div class="title">
+            全国疫情可视化
+        </div>
+    </div>
+    <div class="map layui-row">
+        <div class="layui-col-md6 layui-col-xs12 layui-col-sm12">
+            <div id="map" style="width: 100%; height: 500px;border-radius: 5px 5px"></div>
+        </div>
+        <div class="layui-col-md6 layui-col-xs12 layui-col-sm12">
+            <div id="view1" style="width: 100%;height: 500px;border-radius: 5px 5px"></div>
+        </div>
+    </div>
+    <div class="map1 layui-row">
+        <div class="layui-col-md6 layui-col-xs12 layui-col-sm12">
+            <form class="layui-form" action="" style="width: 200px;">
+                <div class="layui-form-label">省份：</div>
+                <div class="layui-input-block">
+                    <select id="select" name="filter" lay-filter="demo">
+                        <option value="武汉">武汉</option>
+                        <option value="北京">北京</option>
+                        <option value="山东">山东</option>
+                        <option value="河南">河南</option>
+                        <option value="浙江">浙江</option>
+                    </select>
+                </div>
+            </form>
+            <div id="view2" style="width: 100%; height: 400px"></div>
+        </div>
+        <div class="layui-col-md6 layui-col-xs12 layui-col-sm12">
+            <div id="main" style="width: 100%;height:450px;"></div>
+        </div>
+    </div>
+</div>
+<script src="js/baidu.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(demo)', function(data){
+            console.log(data.value);
+            viwer(data.value);
+        });
+
+    });
+</script>
+</body>
+</html>
